@@ -103,11 +103,12 @@ $ npm start
     This algorithm sorts the properties in order to be presented to the user. This can be helpful for showing the best matched properties first and the least matched properties last to the end-user.
 
 
-## Future Scope
+## Improvement Scope
 1. Data segregation of properties based on landmark. This prevents querying of entire dataset.
 2. Add Automated tests. This ensures that nothing breaks with the next release.
 3. Improvement to the percentage calculation algorithm.
 4. Store credentials in the Environment Variables.
+5.
 
 ## Author
 * Prasanna Mestha
