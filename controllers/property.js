@@ -64,5 +64,21 @@ exports.search = (req, res) => {
 
 // Insert a property
 exports.create = (req, res) => {
-  res.json({message: 'Welcome to API'});
+  const {
+    lat,
+    lon,
+    price,
+    bedrooms,
+    bathrooms,
+  } = req.body;
+
+  mysql.addProperty(lat, lon, price, bedrooms, bathrooms)
+      .then(() => {
+        console.log('here');
+        res.status(200).json({message: 'Property added successfully'});
+      })
+      .catch((error) => {
+        // TODO: Handle errors
+        res.status(400).json(error);
+      });
 };

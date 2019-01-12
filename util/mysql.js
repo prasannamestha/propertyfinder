@@ -26,8 +26,8 @@ const connectToMysql = () => {
 const setupPropertiesTable = () => {
   const sql = `CREATE TABLE IF NOT EXISTS properties (
     Id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Latitude varchar(255) NOT NULL,
-    Longitude varchar(255) NOT NULL,
+    Latitude FLOAT(5,5) NOT NULL,
+    Longitude FLOAT(5,5) NOT NULL,
     Price FLOAT(20, 2) NOT NULL,
     Bedrooms TINYINT(3) NOT NULL,
     Bathrooms TINYINT(3) NOT NULL
@@ -67,6 +67,22 @@ const fetchProperties = (
   });
 };
 
+const addProperty = (lat, lon, price, bedrooms, bathrooms) => {
+  return new Promise((resolve, reject) => {
+    const sql = `INSERT INTO properties
+      (Latitude, Longitude, Price, Bedrooms, Bathrooms)
+    VALUES
+      (${lat}, ${lon}, ${price}, ${bedrooms}, ${bathrooms});
+    `;
+    connection.query(sql, (error, results, fields) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(results);
+    });
+  });
+};
+
 const setup = () => {
   connectToMysql();
   setupPropertiesTable();
@@ -77,4 +93,5 @@ module.exports = {
   connection,
   maxRadiusDistance,
   fetchProperties,
+  addProperty,
 };

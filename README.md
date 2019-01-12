@@ -9,13 +9,35 @@ $ npm install
 ```
 
 ## Setup
-1. Update mysql credentials and property table name in util/mysql.js
+1. Update mysql credentials and database name in util/mysql.js
 
 ## Usage
 
+Running:
 ```bash
 $ npm start
 ```
+Add new Property:
+```
+curl -X POST \
+  http://localhost:3000/api/property \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: ed75d46f-584c-d358-96c5-67a3f5ce98fc' \
+  -d '{
+	"lat": 10.689604,
+	"lon": 40.689604,
+	"price": 7500000,
+	"bedrooms": 2,
+	"bathrooms": 2
+}'
+```
+
+Retrieve properties:
+```
+http://localhost:3000/api/property?lat=40.689604&lon=-74.04455&minBudget=18500000&maxBudget=16500000&&minBathrooms=4&maxBathrooms=6&maxBedrooms=6
+```
+
 
 ## Algorithm
 * ### Searching
@@ -108,7 +130,7 @@ $ npm start
 2. Add Automated tests. This ensures that nothing breaks with the next release.
 3. Improvement to the percentage calculation algorithm.
 4. Store credentials in the Environment Variables.
-5.
+5. Data sanitization and validation.
 
 ## Author
 * Prasanna Mestha
